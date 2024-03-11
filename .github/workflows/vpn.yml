@@ -15,6 +15,9 @@ jobs:
     container:
       image: ubuntu
     steps:
+      - run: apt-get update
+      - run: apt-get install curl
+      - run: apt-get install gpg
       - run: mkdir -p /etc/apt/keyrings # directory does not exist on older releases
       - run: curl -fsSL https://swupdate.openvpn.net/repos/repo-public.gpg | gpg --dearmor > /etc/apt/keyrings/openvpn-repo-public.gpg
       - run: echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/stable jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
