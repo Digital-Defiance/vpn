@@ -1,0 +1,19 @@
+name: "Deploy VPN"
+
+on:
+  workflow_dispatch:
+
+env:
+  AWS_REGION: eu-south-1
+
+jobs:
+
+  deploy-vpn:
+    name: Deploy VPN
+    timeout-minutes: 1500
+    runs-on: vpn
+    container:
+      image: ubuntu
+    steps:
+      - run: echo "Test"
+
