@@ -15,5 +15,6 @@ jobs:
     container:
       image: ubuntu
     steps:
-      - run: echo "Test"
+      - run: mkdir -p /etc/apt/keyrings # directory does not exist on older releases
+      - run: curl -fsSL https://swupdate.openvpn.net/repos/repo-public.gpg | gpg --dearmor > /etc/apt/keyrings/openvpn-repo-public.gpg
 
