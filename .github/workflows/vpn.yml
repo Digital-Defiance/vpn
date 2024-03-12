@@ -17,7 +17,7 @@ jobs:
     container:
       image: ubuntu
       volumes:
-        - ./vpn:/vpn
+        - ./:/vpn
     steps:
       - run: apt-get update
       - run: apt-get install curl -y
@@ -28,7 +28,7 @@ jobs:
       - run: apt-get update
       - run: apt-get install openvpn -y
       - run: mkdir vpn
-      - run: cd vpn & openvpn --genkey --secret static.key
+      - run: openvpn --genkey --secret static.key
 
 
   deploy-vpn-remote:
