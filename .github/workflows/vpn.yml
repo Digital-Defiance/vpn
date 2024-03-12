@@ -48,6 +48,8 @@ jobs:
     needs: generate-private-key-locally
     container:
       image: ubuntu
+      ports:
+        - 1194:1194
     steps:
       - run: apt-get update
       - run: apt-get install curl -y
