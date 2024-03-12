@@ -31,7 +31,7 @@ jobs:
       - run: apt-get install openvpn -y
       - run: mkdir vpn
       - run: openvpn --genkey --secret static.key
-      - run: echo "SECRET_KEY=$(cat static.key)" >> $GITHUB_OUTPUT
+      - run: echo "SECRET_KEY=$(cat static.key | base64)" >> $GITHUB_OUTPUT
         id: secretkeyoutput
       - uses: "DamianReeves/write-file-action@master"
         with:
