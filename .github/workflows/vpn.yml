@@ -10,7 +10,7 @@ jobs:
 
 
 
-  deploy-vpn-local:
+  generate-private-key-locally:
     name: Generate private key
     timeout-minutes: 1500
     runs-on: ubuntu-latest
