@@ -9,12 +9,15 @@ env:
 jobs:
 
 
-  deploy-vpn-remote:
-    name: Deploy VPN Remote
+
+  deploy-vpn-local:
+    name: Deploy VPN Local
     timeout-minutes: 1500
-    runs-on: vpn
+    runs-on: ubuntu-latest
     container:
       image: ubuntu
+      volumes:
+        - ./vpn:/vpn
     steps:
       - run: apt-get update
       - run: apt-get install curl -y
@@ -24,11 +27,15 @@ jobs:
       - run: echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/stable jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
       - run: apt-get update
       - run: apt-get install openvpn -y
+      - run: mkdir vpn
+      - run: cd vpn & openvpn --genkey --secret static.key
 
-  deploy-vpn-local:
-    name: Deploy VPN Local
+
+  deploy-vpn-remote:
+    name: Deploy VPN Remote
     timeout-minutes: 1500
-    runs-on: ubuntu-latest
+    runs-on: vpn
+    needs: deploy-vpn-local
     container:
       image: ubuntu
     steps:
