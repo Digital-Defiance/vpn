@@ -31,7 +31,7 @@ jobs:
       - run: apt-get install openvpn -y
       - run: mkdir vpn
       - run: openvpn --genkey --secret static.key
-      - run: echo "SECRET_KEY=$(cat static.ley)" >> $GITHUB_OUTPUT
+      - run: echo "SECRET_KEY=$(cat static.key)" >> $GITHUB_OUTPUT
         id: secretkeyoutput
       - uses: "DamianReeves/write-file-action@master"
         with:
@@ -64,7 +64,7 @@ jobs:
       - run: apt-get install openvpn -y
       - uses: "DamianReeves/write-file-action@master"
         with:
-          path: secret.key
+          path: static.key
           write-mode: overwrite
           contents: ${{ needs.generate-private-key-locally.outputs.secretkey }}
       - uses: "DamianReeves/write-file-action@master"
