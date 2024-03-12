@@ -11,7 +11,7 @@ jobs:
 
 
   deploy-vpn-local:
-    name: Deploy VPN Local
+    name: Generate private key
     timeout-minutes: 1500
     runs-on: ubuntu-latest
     container:
