@@ -10,7 +10,7 @@ jobs:
 
 
   deploy-vpn-remote:
-    name: Deploy VPN
+    name: Deploy VPN Remote
     timeout-minutes: 1500
     runs-on: vpn
     container:
