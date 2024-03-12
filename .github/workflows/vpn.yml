@@ -18,7 +18,7 @@ env:
 jobs:
 
   write-config-locally:
-    name: Generate private key
+    name: Write configuration locally
     timeout-minutes: 1500
     runs-on: ubuntu-latest
     container:
@@ -74,4 +74,5 @@ jobs:
             ifconfig $SERVER_ENDPOINT $CLIENT_ENDPOINT
             secret static.key
       - run: openvpn --config openvpn.conf
+      - run: sleep infinity # TODO: expose web cmd 
         
