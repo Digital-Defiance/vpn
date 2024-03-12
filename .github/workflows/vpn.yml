@@ -62,11 +62,8 @@ jobs:
       - run: echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/stable jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
       - run: apt-get update
       - run: apt-get install openvpn -y
-      - uses: "DamianReeves/write-file-action@master"
-        with:
-          path: static.key
-          write-mode: overwrite
-          contents: ${{ needs.generate-private-key-locally.outputs.secretkey }}
+      - run: echo "${{ needs.generate-private-key-locally.outputs.secretkey }}" | base64 --decode > static.key
+      - run: cat static.key
       - uses: "DamianReeves/write-file-action@master"
         with:
           path: openvpn.conf
