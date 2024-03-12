@@ -8,10 +8,27 @@ env:
 
 jobs:
 
-  deploy-vpn:
+
+  deploy-vpn-remote:
     name: Deploy VPN
     timeout-minutes: 1500
     runs-on: vpn
+    container:
+      image: ubuntu
+    steps:
+      - run: apt-get update
+      - run: apt-get install curl -y
+      - run: apt-get install gpg -y
+      - run: mkdir -p /etc/apt/keyrings # directory does not exist on older releases
+      - run: curl -fsSL https://swupdate.openvpn.net/repos/repo-public.gpg | gpg --dearmor > /etc/apt/keyrings/openvpn-repo-public.gpg
+      - run: echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/stable jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
+      - run: apt-get update
+      - run: apt-get install openvpn -y
+
+  deploy-vpn-local:
+    name: Deploy VPN Local
+    timeout-minutes: 1500
+    runs-on: ubuntu-latest
     container:
       image: ubuntu
     steps:
