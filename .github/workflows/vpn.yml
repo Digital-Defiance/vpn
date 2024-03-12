@@ -37,7 +37,7 @@ jobs:
           contents: |
             remote myremote.mydomain
             dev tun
-            ifconfig 10.8.0.2 10.8.0.1
+            ifconfig $CLIENT_ENDPOINT $SERVER_ENDPOINT
             secret static.key
 
 
@@ -63,7 +63,7 @@ jobs:
           write-mode: overwrite
           contents: |
             dev tun
-            ifconfig 10.8.0.1 10.8.0.2
+            ifconfig $SERVER_ENDPOINT $CLIENT_ENDPOINT
             secret static.key
       - run: openvpn --config openvpn.conf
         
